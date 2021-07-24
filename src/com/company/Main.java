@@ -1,10 +1,10 @@
 package com.company;
 
-import javax.imageio.ImageIO;
-import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import javax.imageio.ImageIO;           //class which provides lots of utility method related to images processing (reading,writing, read BufferedImg). 
+import java.awt.Color;                  //creates color by using the given RGBA values
+import java.awt.image.BufferedImage;    //a subclass of Image class. It is used to handle and manipulate the image data
+import java.io.File;                    
+import java.io.IOException;             //Signals that an I/O exception of some sort has occurred
 import java.util.ArrayList;
 
 
@@ -20,6 +20,7 @@ class Pair {
         this.y = y;
     }
 }
+
  class digitalSignature{
 
     ArrayList<Pair> embeddingPoints;
@@ -83,9 +84,9 @@ class Embedding extends digitalSignature{
         for (Pair pair : embeddingPoints) {
 
             int data = signature[cnt];
-            //System.out.print("  "+ data);
             int[] bits = getBits(data);
             int pixel = buf_img.getRGB(pair.x, pair.y);
+            
             //Creating a Color object from pixel value
             Color color = new Color(pixel);
             //Retrieving the R G B values
@@ -132,15 +133,18 @@ class Extraction extends digitalSignature{
 
 
             int []bit=new int[3];
+            //It returns an integer pixel in the default RGB color model (TYPE_INT_ARGB) and default sRGB colorspace.
+            /*The TYPE_INT_ARGB represents Color as an int (4 bytes) with alpha channel in bits 24-31, 
+              red channels in 16-23, green in 8-15 and blue in 0-7.*/
+            
             int pixel = image.getRGB(pair.x, pair.y);
             Color color = new Color(pixel);
-            //System.out.println(pair.x+":"+ pair.y+"="+color.getRed()+" "+color.getGreen()+" "+ color.getBlue());
+           
             //Retrieving the R G B values
             bit[0] = color.getRed()  & 7;
             bit[1] = color.getGreen()& 7;
             bit[2] = color.getBlue() & 3;
-            //System.out.println(bit[0]+":"+bit[1]+":"+bit[2]);
-            //System.out.println(bit[0]+" "+bit[1]+" "+bit[2]);
+            
             int data = getByte(bit);
             char s;
             s=(char)data;
