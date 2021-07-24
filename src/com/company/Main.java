@@ -96,9 +96,9 @@ class Embedding extends digitalSignature{
             //System.out.print(pair.x+" "+ pair.y+" "+"[" + r + "," + g + " "+ b+"]");
 
 
-            r = (r & ~7) | bits[0];
-            g = (g & ~7) | bits[1];
-            b = (b & ~3) | bits[2];
+            r = (r & ~7) | bits[0];         //last three bits contains the bit[0]
+            g = (g & ~7) | bits[1];         //last three bits contains the bit[1]
+            b = (b & ~3) | bits[2];         //last two bits contains the bit[2]
 
 
 
